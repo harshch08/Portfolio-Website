@@ -131,6 +131,35 @@
     box-shadow: var(--shadow-card);
   }
   
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    .glass-card {
+      @apply bg-card/90;
+    }
+    
+    /* Improve text readability on mobile */
+    h1, h2, h3 {
+      @apply leading-tight;
+    }
+    
+    /* Better spacing for mobile */
+    .py-20 {
+      @apply py-12;
+    }
+    
+    /* Improve button sizing on mobile */
+    button {
+      @apply min-h-[44px];
+    }
+  }
+  
+  /* Tablet improvements */
+  @media (max-width: 768px) {
+    .py-20 {
+      @apply py-16;
+    }
+  }
+  
   /* Glow Effect */
   .glow {
     box-shadow: var(--shadow-glow);

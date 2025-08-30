@@ -165,7 +165,7 @@ const Hero = () => {
         >
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl font-poppins font-bold mb-4"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins font-bold mb-4 px-4"
           >
             <span className="bg-gradient-primary bg-clip-text text-transparent">
               {personal.name}
@@ -174,21 +174,21 @@ const Hero = () => {
 
           <motion.h2
             variants={itemVariants}
-            className="text-2xl md:text-3xl font-poppins font-medium text-muted-foreground mb-6"
+            className="text-xl sm:text-2xl md:text-3xl font-poppins font-medium text-muted-foreground mb-6 px-4"
           >
             {personal.title}
           </motion.h2>
 
           <motion.p
             variants={itemVariants}
-            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed px-4"
           >
             {personal.tagline}
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 px-4"
           >
             <Button
               size="lg"
@@ -209,7 +209,7 @@ const Hero = () => {
 
           <motion.div
             variants={itemVariants}
-            className="flex justify-center space-x-6"
+            className="flex justify-center space-x-4 sm:space-x-6 px-4"
           >
             <motion.a
               href={personal.social.github}

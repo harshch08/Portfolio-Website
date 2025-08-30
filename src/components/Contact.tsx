@@ -29,7 +29,7 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
             {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -89,7 +89,7 @@ const Contact = () => {
                   <CardTitle className="text-2xl font-poppins font-semibold">Connect With Me</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                     <motion.a
                       href={personal.social.github}
                       target="_blank"

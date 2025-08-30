@@ -75,7 +75,7 @@ const Skills = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {skillCategories.map((category, index) => {
               const IconComponent = category.icon;
               return (
@@ -89,7 +89,7 @@ const Skills = () => {
                   {/* Glow effect background */}
                   <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-xl blur-xl" />
                   
-                  <div className={`relative glass-card p-8 hover:shadow-elegant transition-smooth group border border-border/30 ${category.hoverColor}`}>
+                  <div className={`relative glass-card p-6 sm:p-8 hover:shadow-elegant transition-smooth group border border-border/30 ${category.hoverColor}`}>
                     {/* Header with icon and title */}
                     <div className="flex items-center mb-6">
                       <motion.div 

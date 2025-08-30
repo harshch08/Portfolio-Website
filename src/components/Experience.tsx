@@ -56,17 +56,17 @@ const Experience = () => {
                 className="relative"
               >
                 <Card className="glass-card border-primary/20 hover:shadow-elegant transition-all duration-500 group">
-                  <CardContent className="p-8">
+                  <CardContent className="p-6 sm:p-8">
                     {/* Header Row */}
                     <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
                       <div className="flex-1">
                         <div className="flex items-center mb-2">
                           <div className="w-3 h-3 bg-primary rounded-full mr-3" />
-                          <h3 className="text-2xl font-poppins font-bold text-primary group-hover:text-primary/80 transition-colors">
+                          <h3 className="text-xl sm:text-2xl font-poppins font-bold text-primary group-hover:text-primary/80 transition-colors">
                             {job.position}
                           </h3>
                         </div>
-                        <div className="flex items-center text-lg font-semibold text-foreground mb-2">
+                        <div className="flex items-center text-base sm:text-lg font-semibold text-foreground mb-2">
                           <Building className="text-muted-foreground mr-2" size={18} />
                           {job.company}
                         </div>

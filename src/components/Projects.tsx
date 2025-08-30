@@ -39,7 +39,7 @@ const Projects = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             <AnimatePresence mode="wait">
               {displayedProjects.map((project, index) => (
                 <motion.div

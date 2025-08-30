@@ -25,15 +25,15 @@ const About = () => {
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Profile Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
+              className="relative order-2 lg:order-1"
             >
-              <div className="relative w-80 h-80 mx-auto">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto">
                 <div className="absolute inset-0 bg-gradient-primary rounded-full blur-xl opacity-30 animate-float" />
                 <div className="relative w-full h-full glass-card rounded-full p-4 hover:shadow-glow transition-smooth">
                                   <img 
@@ -50,7 +50,7 @@ const About = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-6"
+              className="space-y-6 order-1 lg:order-2"
             >
               <h3 className="text-2xl font-poppins font-semibold text-primary">
                 {personal.title}

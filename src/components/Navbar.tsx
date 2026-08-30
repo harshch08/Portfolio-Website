@@ -2,78 +2,82 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Code, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { scrollToSection as lenisScrollTo } from '@/lib/scroll';
+
+const NAV_ITEMS = [
+  { name: 'Home', href: '#hero' },
+  { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Education', href: '#education' },
+  { name: 'Contact', href: '#contact' }
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [scrolled, setScrolled] = useState(false);
 
-  const navItems = [
-    { name: 'Home', href: '#hero' },
-    { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Education', href: '#education' },
-    { name: 'Contact', href: '#contact' }
-  ];
-
   useEffect(() => {
-    const handleScroll = () => {
-      // Check if scrolled
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
+    // High-performance scroll listener for navbar background blur (RAF throttled)
+    let rafId: number | null = null;
+    let lastScrolled = false;
 
-      // Active section detection
-      const sections = navItems.map(item => item.href.substring(1));
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+    const onScroll = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        const isScrolled = window.scrollY > 20;
+        if (isScrolled !== lastScrolled) {
+          lastScrolled = isScrolled;
+          setScrolled(isScrolled);
         }
-        return false;
+        rafId = null;
       });
-      if (currentSection) {
-        setActiveSection(currentSection);
-      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Zero-overhead IntersectionObserver for active section tracking
+    const sections = NAV_ITEMS.map(item => item.href.substring(1));
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0.1,
+    });
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
   }, []);
 
-  const scrollToSection = (href: string) => {
-    console.log('Attempting to scroll to:', href);
-    const element = document.querySelector(href);
-    console.log('Element found:', element);
-    
-    if (element) {
-      // Close mobile menu first
-      setIsOpen(false);
-      
-      // Add a small delay to ensure menu closes before scrolling
-      setTimeout(() => {
-        try {
-          element.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-          console.log('Scroll completed to:', href);
-        } catch (error) {
-          console.error('Error scrolling to section:', error);
-          // Fallback to simple scroll
-          element.scrollIntoView();
-        }
-      }, 100);
-    } else {
-      console.error('Element not found for href:', href);
-    }
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+    lenisScrollTo(href, -70);
   };
 
   const downloadResume = () => {
-    // You can add your resume download logic here
-    window.open('/resume.pdf', '_blank');
+    const link = document.createElement('a');
+    link.href = '/HarshResume.pdf';
+    link.download = 'HarshResume.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -94,7 +98,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center cursor-pointer"
-            onClick={() => scrollToSection('#hero')}
+            onClick={() => handleNavClick('#hero')}
           >
             <div className="relative">
               <Code className="w-8 h-8 text-primary hover:rotate-12 transition-transform duration-300" />
@@ -108,7 +112,7 @@ const Navbar = () => {
 
           {/* Centered Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1 absolute left-1/2 transform -translate-x-1/2">
-            {navItems.map((item, index) => (
+            {NAV_ITEMS.map((item, index) => (
               <motion.div
                 key={item.name}
                 initial={{ opacity: 0, y: -20 }}
@@ -117,7 +121,7 @@ const Navbar = () => {
                 className="relative"
               >
                 <button
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNavClick(item.href)}
                   className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${
                     activeSection === item.href.substring(1)
                       ? 'text-primary bg-primary/10'
@@ -211,13 +215,13 @@ const Navbar = () => {
               className="lg:hidden overflow-hidden"
             >
               <div className="py-4 border-t border-border/30 bg-background/50 backdrop-blur-sm rounded-lg mt-2">
-                {navItems.map((item, index) => (
+                {NAV_ITEMS.map((item, index) => (
                   <motion.button
                     key={item.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    onClick={() => scrollToSection(item.href)}
+                    onClick={() => handleNavClick(item.href)}
                     className={`flex items-center justify-between w-full text-left py-3 px-4 rounded-lg transition-all duration-300 ${
                       activeSection === item.href.substring(1)
                         ? 'text-primary bg-primary/10 border border-primary/20'

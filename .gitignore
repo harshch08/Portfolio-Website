@@ -30,6 +30,9 @@ build/
 .Trashes
 ehthumbs.db
 Thumbs.db
+Icon
+Icon?
+Icon$'\r'
 
 # Logs
 logs

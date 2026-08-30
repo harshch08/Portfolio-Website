@@ -9,7 +9,9 @@ import {
   Cpu,
   Globe,
   Award,
-  Zap
+  Zap,
+  Sparkles,
+  Layers
 } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 
@@ -27,32 +29,39 @@ const Skills = () => {
       iconGradient: "from-blue-500 to-blue-600"
     },
     {
-      title: "Frameworks & Libraries",
+      title: "Frameworks & Backend",
       skills: skills.frameworks,
       icon: Globe,
-      hoverColor: "hover:border-green-500/50 group-hover:bg-green-500/5",
-      iconGradient: "from-green-500 to-green-600"
+      hoverColor: "hover:border-emerald-500/50 group-hover:bg-emerald-500/5",
+      iconGradient: "from-emerald-500 to-teal-600"
     },
     {
-      title: "Databases",
+      title: "ML & Generative AI",
+      skills: skills.aiMl,
+      icon: Sparkles,
+      hoverColor: "hover:border-purple-500/50 group-hover:bg-purple-500/5",
+      iconGradient: "from-purple-500 to-indigo-600"
+    },
+    {
+      title: "DevOps & Tools",
+      skills: skills.tools,
+      icon: GitBranch,
+      hoverColor: "hover:border-orange-500/50 group-hover:bg-orange-500/5",
+      iconGradient: "from-amber-500 to-orange-600"
+    },
+    {
+      title: "Databases & Storage",
       skills: skills.databases,
       icon: Database,
-      hoverColor: "hover:border-purple-500/50 group-hover:bg-purple-500/5",
-      iconGradient: "from-purple-500 to-purple-600"
+      hoverColor: "hover:border-cyan-500/50 group-hover:bg-cyan-500/5",
+      iconGradient: "from-cyan-500 to-blue-500"
     },
     {
-      title: "Tools & Technologies",
-      skills: skills.tools,
-      icon: Settings,
-      hoverColor: "hover:border-orange-500/50 group-hover:bg-orange-500/5",
-      iconGradient: "from-orange-500 to-orange-600"
-    },
-    {
-      title: "Core Concepts",
+      title: "Architecture & Core Concepts",
       skills: skills.concepts,
       icon: Cpu,
       hoverColor: "hover:border-pink-500/50 group-hover:bg-pink-500/5",
-      iconGradient: "from-pink-500 to-pink-600"
+      iconGradient: "from-rose-500 to-pink-600"
     }
   ];
 

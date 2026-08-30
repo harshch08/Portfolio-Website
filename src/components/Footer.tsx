@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Heart, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
+import { scrollToSection } from '@/lib/scroll';
 
 const Footer = () => {
   const { personal } = portfolioData;
@@ -36,10 +37,7 @@ const Footer = () => {
               {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((link) => (
                 <button
                   key={link}
-                  onClick={() => {
-                    const element = document.querySelector(`#${link.toLowerCase()}`);
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  onClick={() => scrollToSection(`#${link.toLowerCase()}`)}
                   className="text-muted-foreground hover:text-primary transition-smooth"
                 >
                   {link}

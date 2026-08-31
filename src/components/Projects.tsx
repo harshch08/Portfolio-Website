@@ -371,8 +371,10 @@ const Projects = () => {
                             <div className="w-2.5 h-2.5 rounded-full bg-amber-500/90" />
                             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/90" />
                           </div>
-                          <div className="flex-1 max-w-[260px] mx-auto bg-white/5 text-[11px] text-white/70 px-2.5 py-0.5 rounded text-center truncate border border-white/5 font-mono">
-                            https://{project.id}.harsh.dev
+                          <div className="flex-1 max-w-[280px] mx-auto bg-white/5 text-[11px] text-white/70 px-2.5 py-0.5 rounded text-center truncate border border-white/5 font-mono">
+                            {project.demo && !project.demo.includes('github.com')
+                              ? project.demo.replace(/\/$/, '')
+                              : `https://${project.id}.harsh.dev`}
                           </div>
                           <div className="w-2.5 h-2.5 opacity-0" />
                         </div>

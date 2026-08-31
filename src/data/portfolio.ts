@@ -64,7 +64,7 @@ export const portfolioData = {
         "Integrated automated Gemini-powered product content generation to accelerate catalog management and improve product discovery efficiency by 75%."
       ],
       github: "https://github.com/harshch08",
-      demo: "https://github.com/harshch08"
+      demo: "https://joota-junciton.vercel.app/"
     },
     {
       id: "movie-recommender",
@@ -88,7 +88,7 @@ export const portfolioData = {
         "Engineered an interactive chatbot-driven recommendation workflow in Streamlit to deliver contextual and personalized movie discovery conversations."
       ],
       github: "https://github.com/harshch08",
-      demo: "https://github.com/harshch08"
+      demo: "https://cinematic-ai-movie-recommendor.streamlit.app/"
     },
     {
       id: "voice-of-bharat",
@@ -112,7 +112,7 @@ export const portfolioData = {
         "Delivered scalable architecture and performance optimization independently as a freelance project."
       ],
       github: "https://github.com/harshch08",
-      demo: "https://github.com/harshch08"
+      demo: "https://voiceofbharat.live"
     },
     {
       id: "doctor-appointment",

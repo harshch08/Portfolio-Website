@@ -66,7 +66,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-secondary/30">
+    <section id="skills" className="relative z-20 py-20 px-4 sm:px-6 lg:px-8 bg-gradient-secondary/30">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
@@ -84,7 +84,7 @@ const Skills = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {skillCategories.map((category, index) => {
               const IconComponent = category.icon;
               return (
@@ -98,17 +98,17 @@ const Skills = () => {
                   {/* Glow effect background */}
                   <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-xl blur-xl" />
                   
-                  <div className={`relative glass-card p-6 sm:p-8 hover:shadow-elegant transition-smooth group border border-border/30 ${category.hoverColor}`}>
+                  <div className={`relative glass-card p-4 sm:p-6 md:p-8 hover:shadow-elegant transition-smooth group border border-border/30 rounded-2xl ${category.hoverColor}`}>
                     {/* Header with icon and title */}
-                    <div className="flex items-center mb-6">
+                    <div className="flex items-center mb-4 sm:mb-6">
                       <motion.div 
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className={`w-12 h-12 bg-gradient-to-br ${category.iconGradient} rounded-xl flex items-center justify-center mr-4 shadow-glow`}
+                        className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${category.iconGradient} rounded-xl flex items-center justify-center mr-3 sm:mr-4 shadow-glow flex-shrink-0`}
                       >
-                        <IconComponent className="text-white" size={24} />
+                        <IconComponent className="text-white w-5 h-5 sm:w-6 sm:h-6" />
                       </motion.div>
                       <div>
-                        <h3 className="text-lg font-poppins font-semibold group-hover:text-primary transition-smooth">
+                        <h3 className="text-base sm:text-lg font-poppins font-semibold group-hover:text-primary transition-smooth leading-snug">
                           {category.title}
                         </h3>
                         <div className={`w-8 h-0.5 bg-gradient-to-r ${category.iconGradient} rounded-full mt-1`} />
@@ -116,25 +116,25 @@ const Skills = () => {
                     </div>
                     
                     {/* Skills grid */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
                       {category.skills.map((skill, skillIndex) => (
                         <motion.div
                           key={skill}
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                           transition={{ duration: 0.3, delay: (index * 0.1) + (skillIndex * 0.05) }}
-                          whileHover={{ scale: 1.05 }}
+                          whileHover={{ scale: 1.03 }}
                           className="relative overflow-hidden"
                         >
-                          <div className="bg-secondary/30 hover:bg-primary/10 p-3 rounded-lg border border-border/20 hover:border-primary/30 transition-smooth group/skill cursor-default">
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm font-medium text-foreground group-hover/skill:text-primary transition-smooth">
+                          <div className="bg-secondary/40 hover:bg-primary/10 p-2 sm:p-2.5 rounded-lg border border-border/30 hover:border-primary/30 transition-smooth group/skill cursor-default h-full flex items-center">
+                            <div className="flex items-center justify-between w-full gap-1">
+                              <span className="text-xs sm:text-sm font-medium text-foreground/90 group-hover/skill:text-primary transition-smooth truncate">
                                 {skill}
                               </span>
                               <motion.div
                                 initial={{ scale: 0 }}
                                 whileHover={{ scale: 1 }}
-                                className={`w-2 h-2 bg-gradient-to-r ${category.iconGradient} rounded-full`}
+                                className={`w-1.5 h-1.5 bg-gradient-to-r ${category.iconGradient} rounded-full flex-shrink-0`}
                               />
                             </div>
                           </div>
@@ -143,18 +143,18 @@ const Skills = () => {
                     </div>
 
                     {/* Skill count badge */}
-                    <div className="mt-6 flex justify-between items-center">
+                    <div className="mt-5 sm:mt-6 flex justify-between items-center pt-3 border-t border-border/30">
                       <div className="flex items-center space-x-2">
-                        <Award className="text-primary" size={16} />
-                        <span className="text-xs text-muted-foreground font-medium">
+                        <Award className="text-primary" size={15} />
+                        <span className="text-[11px] sm:text-xs text-muted-foreground font-medium">
                           {category.skills.length} Technologies
                         </span>
                       </div>
                       <motion.div
                         whileHover={{ scale: 1.1 }}
-                        className={`w-8 h-8 bg-gradient-to-r ${category.iconGradient}/20 rounded-full flex items-center justify-center border border-primary/30`}
+                        className={`w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r ${category.iconGradient}/20 rounded-full flex items-center justify-center border border-primary/30`}
                       >
-                        <Zap className={`bg-gradient-to-r ${category.iconGradient} bg-clip-text text-transparent`} size={14} />
+                        <Zap className={`bg-gradient-to-r ${category.iconGradient} bg-clip-text text-transparent`} size={13} />
                       </motion.div>
                     </div>
                   </div>
@@ -168,13 +168,13 @@ const Skills = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-16"
+            className="mt-14 sm:mt-16"
           >
-            <h3 className="text-2xl font-poppins font-semibold text-center mb-8">
+            <h3 className="text-xl sm:text-2xl font-poppins font-semibold text-center mb-6 sm:mb-8">
               Professional <span className="bg-gradient-primary bg-clip-text text-transparent">Highlights</span>
             </h3>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
               {[
                 { label: "Problem Solving", icon: GitBranch, description: "Complex algorithm design" },
                 { label: "Team Leadership", icon: Award, description: "Cross-functional collaboration" },
@@ -189,19 +189,19 @@ const Skills = () => {
                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.5, delay: 0.8 + (index * 0.1) }}
                     whileHover={{ y: -5 }}
-                    className="glass-card p-6 text-center hover:shadow-glow transition-smooth group"
+                    className="glass-card p-3.5 sm:p-6 text-center hover:shadow-glow transition-smooth group rounded-xl sm:rounded-2xl"
                   >
                     <motion.div 
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
-                      className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-glow"
+                      className="w-11 h-11 sm:w-14 sm:h-14 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-glow"
                     >
-                      <IconComp className="text-primary-foreground" size={24} />
+                      <IconComp className="text-primary-foreground w-5 h-5 sm:w-6 sm:h-6" />
                     </motion.div>
-                    <h4 className="font-poppins font-semibold mb-2 group-hover:text-primary transition-smooth">
+                    <h4 className="text-sm sm:text-base font-poppins font-semibold mb-1 group-hover:text-primary transition-smooth">
                       {highlight.label}
                     </h4>
-                    <p className="text-xs text-muted-foreground">{highlight.description}</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">{highlight.description}</p>
                   </motion.div>
                 );
               })}

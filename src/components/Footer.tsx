@@ -102,14 +102,7 @@ const Footer = () => {
           className="mt-8 pt-8 border-t border-border/30 text-center"
         >
           <p className="text-sm text-muted-foreground flex items-center justify-center">
-            © {currentYear} {personal.name}. 
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-              className="mx-1"
-            >
-              
-            </motion.span>
+            © {currentYear} {personal.name}. All rights reserved.
           </p>
         </motion.div>
       </div>

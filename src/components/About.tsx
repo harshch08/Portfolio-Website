@@ -31,16 +31,17 @@ const About = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative order-2 lg:order-1"
+              className="relative order-2 lg:order-1 flex justify-center"
             >
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto">
-                <div className="absolute inset-0 bg-gradient-primary rounded-full blur-xl opacity-30 animate-float" />
-                <div className="relative w-full h-full glass-card rounded-full p-4 hover:shadow-glow transition-smooth">
-                                  <img 
-                  src="/profile-photo.jpeg" 
-                  alt={`${personal.name} profile photo`}
-                  className="w-full h-full object-cover rounded-full"
-                />
+              <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80 mx-auto">
+                <div className="absolute inset-0 bg-gradient-primary rounded-full blur-xl opacity-30 animate-pulse-glow" />
+                <div className="relative w-full h-full glass-card rounded-full p-2.5 sm:p-4 hover:shadow-glow transition-smooth border-2 border-primary/30">
+                  <img 
+                    src="/profile-photo.jpeg" 
+                    alt={`${personal.name} profile photo`}
+                    className="w-full h-full object-cover rounded-full"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </motion.div>
@@ -50,39 +51,51 @@ const About = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-6 order-1 lg:order-2"
+              className="space-y-5 sm:space-y-6 order-1 lg:order-2"
             >
-              <h3 className="text-2xl font-poppins font-semibold text-primary">
+              <h3 className="text-xl sm:text-2xl font-poppins font-semibold text-primary">
                 {personal.title}
               </h3>
               
-              <p className="text-muted-foreground leading-relaxed text-lg">
+              <p className="text-muted-foreground leading-relaxed text-sm sm:text-base md:text-lg">
                 {personal.bio}
               </p>
 
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <MapPin className="text-primary" size={20} />
-                  <span className="text-muted-foreground">{personal.location}</span>
+              <div className="space-y-3 pt-1">
+                <div className="flex items-center space-x-3 text-xs sm:text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary border border-primary/20">
+                    <MapPin size={16} />
+                  </div>
+                  <span className="text-muted-foreground font-medium">{personal.location}</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="text-primary" size={20} />
-                  <span className="text-muted-foreground">{personal.phone}</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="text-primary" size={20} />
-                  <span className="text-muted-foreground">{personal.email}</span>
-                </div>
+                <a 
+                  href={`tel:${personal.phone}`}
+                  className="flex items-center space-x-3 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary border border-primary/20 group-hover:scale-105 transition-transform">
+                    <Phone size={16} />
+                  </div>
+                  <span className="font-medium">{personal.phone}</span>
+                </a>
+                <a 
+                  href={`mailto:${personal.email}`}
+                  className="flex items-center space-x-3 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary border border-primary/20 group-hover:scale-105 transition-transform">
+                    <Mail size={16} />
+                  </div>
+                  <span className="font-medium truncate">{personal.email}</span>
+                </a>
               </div>
 
-              <div className="grid grid-cols-2 gap-6 mt-8">
-                <div className="glass-card p-4 text-center hover:shadow-elegant transition-smooth">
-                  <h4 className="text-2xl font-poppins font-bold text-primary">1+</h4>
-                  <p className="text-sm text-muted-foreground">Years Experience</p>
+              <div className="grid grid-cols-2 gap-3 sm:gap-6 mt-6 sm:mt-8">
+                <div className="glass-card p-3.5 sm:p-5 text-center hover:shadow-elegant transition-smooth rounded-xl sm:rounded-2xl border border-primary/20">
+                  <h4 className="text-xl sm:text-2xl font-poppins font-bold bg-gradient-primary bg-clip-text text-transparent">1+</h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">Years Experience</p>
                 </div>
-                <div className="glass-card p-4 text-center hover:shadow-elegant transition-smooth">
-                  <h4 className="text-2xl font-poppins font-bold text-primary">10+</h4>
-                  <p className="text-sm text-muted-foreground">Projects Completed</p>
+                <div className="glass-card p-3.5 sm:p-5 text-center hover:shadow-elegant transition-smooth rounded-xl sm:rounded-2xl border border-primary/20">
+                  <h4 className="text-xl sm:text-2xl font-poppins font-bold bg-gradient-primary bg-clip-text text-transparent">10+</h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">Projects Completed</p>
                 </div>
               </div>
             </motion.div>

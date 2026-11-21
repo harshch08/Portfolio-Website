@@ -1,104 +1,144 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Mail, Phone, Server, Layers, Cpu, CheckCircle2 } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 
 const About = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const { personal } = portfolioData;
 
+  const corePillars = [
+    {
+      title: "Microservices Architecture",
+      description: "Hands-on experience migrating legacy monoliths to decoupled Spring Boot microservices with strong fault isolation.",
+      icon: Server,
+    },
+    {
+      title: "High-Throughput APIs",
+      description: "Engineered scalable REST services, query optimizations, and asynchronous processing reducing response times by ~30%.",
+      icon: Layers,
+    },
+    {
+      title: "Applied AI & Vector Search",
+      description: "Designed multimodal visual search pipelines using CLIP embeddings, cosine similarity, and Gemini LLM automations.",
+      icon: Cpu,
+    },
+  ];
+
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-white/[0.06]">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-poppins font-bold mb-4">
-              About <span className="bg-gradient-primary bg-clip-text text-transparent">Me</span>
+          {/* Section Kicker */}
+          <div className="mb-12">
+            <span className="section-tag">
+              01 // Background
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Engineering scalable systems with precision
             </h2>
-            <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
+            <p className="mt-2 text-zinc-400 text-base max-w-2xl">
+              From enterprise microservices at TCS to multimodal AI search applications.
+            </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Profile Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative order-2 lg:order-1 flex justify-center"
-            >
-              <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80 mx-auto">
-                <div className="absolute inset-0 bg-gradient-primary rounded-full blur-xl opacity-30 animate-pulse-glow" />
-                <div className="relative w-full h-full glass-card rounded-full p-2.5 sm:p-4 hover:shadow-glow transition-smooth border-2 border-primary/30">
-                  <img 
-                    src="/profile-photo.jpeg" 
-                    alt={`${personal.name} profile photo`}
-                    className="w-full h-full object-cover rounded-full"
-                    loading="lazy"
-                  />
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            {/* Left: Profile Card */}
+            <div className="lg:col-span-4 flex flex-col items-center sm:items-start">
+              <div className="w-full max-w-[280px] rounded-2xl overflow-hidden border border-white/[0.08] bg-zinc-900/60 p-2.5 mb-6">
+                <img
+                  src="/profile-photo.jpeg"
+                  alt={`${personal.name}`}
+                  className="w-full aspect-square object-cover rounded-xl grayscale-[20%] hover:grayscale-0 transition-all duration-300"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Quick Info List */}
+              <div className="w-full space-y-2.5 font-mono text-xs text-zinc-400">
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                  <span className="text-zinc-500">Current Role</span>
+                  <span className="text-zinc-200 font-sans font-medium">Software Developer @ TCS</span>
+                </div>
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                  <span className="text-zinc-500">Location</span>
+                  <span className="text-zinc-200 font-sans font-medium flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-zinc-400" />
+                    {personal.location}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                  <span className="text-zinc-500">Education</span>
+                  <span className="text-zinc-200 font-sans font-medium">MCA (Graphic Era Univ)</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* About Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-5 sm:space-y-6 order-1 lg:order-2"
-            >
-              <h3 className="text-xl sm:text-2xl font-poppins font-semibold text-primary">
-                {personal.title}
-              </h3>
-              
-              <p className="text-muted-foreground leading-relaxed text-sm sm:text-base md:text-lg">
-                {personal.bio}
-              </p>
+            {/* Right: Bio & Engineering Pillars */}
+            <div className="lg:col-span-8 space-y-8">
+              <div className="space-y-4 text-zinc-300 leading-relaxed text-base sm:text-lg">
+                <p>
+                  I am a <strong className="text-white font-medium">Full Stack Developer</strong> currently working at <strong className="text-white font-medium">Tata Consultancy Services</strong>, focused on engineering resilient microservices, distributed backend architectures, and high-performance web applications.
+                </p>
+                <p className="text-zinc-400 text-sm sm:text-base">
+                  My experience spans Java, Spring Boot, Angular, and React, alongside production database performance tuning and CI/CD pipelines. I have led monolithic-to-microservices migrations, automated tax computation engines for bulk invoices, and built machine learning applications incorporating CLIP vector search and Gemini-powered catalog intelligence.
+                </p>
+              </div>
 
-              <div className="space-y-3 pt-1">
-                <div className="flex items-center space-x-3 text-xs sm:text-sm">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary border border-primary/20">
-                    <MapPin size={16} />
-                  </div>
-                  <span className="text-muted-foreground font-medium">{personal.location}</span>
+              {/* Core Engineering Pillars */}
+              <div className="space-y-3 pt-2">
+                <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400">
+                  Core Technical Competencies
+                </h3>
+                <div className="grid sm:grid-cols-3 gap-3.5">
+                  {corePillars.map((pillar) => {
+                    const Icon = pillar.icon;
+                    return (
+                      <div
+                        key={pillar.title}
+                        className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-colors"
+                      >
+                        <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-3">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <h4 className="text-sm font-semibold text-white mb-1.5">
+                          {pillar.title}
+                        </h4>
+                        <p className="text-xs text-zinc-400 leading-relaxed">
+                          {pillar.description}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
-                <a 
-                  href={`tel:${personal.phone}`}
-                  className="flex items-center space-x-3 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors group"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary border border-primary/20 group-hover:scale-105 transition-transform">
-                    <Phone size={16} />
-                  </div>
-                  <span className="font-medium">{personal.phone}</span>
-                </a>
-                <a 
+              </div>
+
+              {/* Contact Quick Links */}
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-zinc-400">
+                <a
                   href={`mailto:${personal.email}`}
-                  className="flex items-center space-x-3 text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors group"
+                  className="flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary border border-primary/20 group-hover:scale-105 transition-transform">
-                    <Mail size={16} />
-                  </div>
-                  <span className="font-medium truncate">{personal.email}</span>
+                  <Mail className="w-3.5 h-3.5 text-zinc-500" />
+                  {personal.email}
+                </a>
+                <span className="text-zinc-700">•</span>
+                <a
+                  href={`tel:${personal.phone}`}
+                  className="flex items-center gap-2 hover:text-white transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-zinc-500" />
+                  {personal.phone}
                 </a>
               </div>
-
-              <div className="grid grid-cols-2 gap-3 sm:gap-6 mt-6 sm:mt-8">
-                <div className="glass-card p-3.5 sm:p-5 text-center hover:shadow-elegant transition-smooth rounded-xl sm:rounded-2xl border border-primary/20">
-                  <h4 className="text-xl sm:text-2xl font-poppins font-bold bg-gradient-primary bg-clip-text text-transparent">1+</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">Years Experience</p>
-                </div>
-                <div className="glass-card p-3.5 sm:p-5 text-center hover:shadow-elegant transition-smooth rounded-xl sm:rounded-2xl border border-primary/20">
-                  <h4 className="text-xl sm:text-2xl font-poppins font-bold bg-gradient-primary bg-clip-text text-transparent">10+</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">Projects Completed</p>
-                </div>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>

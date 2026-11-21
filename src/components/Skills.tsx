@@ -2,211 +2,116 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { 
-  Code, 
+  Code2, 
   Database, 
-  Settings, 
+  Terminal, 
   GitBranch, 
   Cpu,
-  Globe,
-  Award,
-  Zap,
-  Sparkles,
-  Layers
+  Layers,
+  Sparkles
 } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 
 const Skills = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const { skills } = portfolioData;
 
   const skillCategories = [
     {
-      title: "Programming Languages",
+      title: "Languages",
       skills: skills.languages,
-      icon: Code,
-      hoverColor: "hover:border-blue-500/50 group-hover:bg-blue-500/5",
-      iconGradient: "from-blue-500 to-blue-600"
+      icon: Code2,
     },
     {
       title: "Frameworks & Backend",
       skills: skills.frameworks,
-      icon: Globe,
-      hoverColor: "hover:border-emerald-500/50 group-hover:bg-emerald-500/5",
-      iconGradient: "from-emerald-500 to-teal-600"
+      icon: Layers,
     },
     {
-      title: "ML & Generative AI",
+      title: "AI & Machine Learning",
       skills: skills.aiMl,
       icon: Sparkles,
-      hoverColor: "hover:border-purple-500/50 group-hover:bg-purple-500/5",
-      iconGradient: "from-purple-500 to-indigo-600"
-    },
-    {
-      title: "DevOps & Tools",
-      skills: skills.tools,
-      icon: GitBranch,
-      hoverColor: "hover:border-orange-500/50 group-hover:bg-orange-500/5",
-      iconGradient: "from-amber-500 to-orange-600"
     },
     {
       title: "Databases & Storage",
       skills: skills.databases,
       icon: Database,
-      hoverColor: "hover:border-cyan-500/50 group-hover:bg-cyan-500/5",
-      iconGradient: "from-cyan-500 to-blue-500"
     },
     {
-      title: "Architecture & Core Concepts",
+      title: "Cloud & DevOps Tools",
+      skills: skills.tools,
+      icon: GitBranch,
+    },
+    {
+      title: "Architecture & Systems",
       skills: skills.concepts,
       icon: Cpu,
-      hoverColor: "hover:border-pink-500/50 group-hover:bg-pink-500/5",
-      iconGradient: "from-rose-500 to-pink-600"
     }
   ];
 
   return (
-    <section id="skills" className="relative z-20 py-20 px-4 sm:px-6 lg:px-8 bg-gradient-secondary/30">
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-white/[0.06]">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-poppins font-bold mb-4">
-              Technical <span className="bg-gradient-primary bg-clip-text text-transparent">Skills</span>
+          {/* Section Header */}
+          <div className="mb-14">
+            <span className="section-tag">
+              04 // Technical Stack
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Skills & Engineering Toolkit
             </h2>
-            <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
-            <p className="mt-6 text-muted-foreground max-w-2xl mx-auto">
-              A comprehensive toolkit of modern technologies and frameworks
+            <p className="mt-2 text-zinc-400 text-base max-w-2xl">
+              Languages, frameworks, databases, and architectural patterns I work with across production services.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {skillCategories.map((category, index) => {
+          {/* Clean 6-Category Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {skillCategories.map((category) => {
               const IconComponent = category.icon;
               return (
-                <motion.div
+                <div
                   key={category.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative group"
+                  className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.07] hover:border-white/[0.14] transition-colors flex flex-col justify-between"
                 >
-                  {/* Glow effect background */}
-                  <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-xl blur-xl" />
-                  
-                  <div className={`relative glass-card p-4 sm:p-6 md:p-8 hover:shadow-elegant transition-smooth group border border-border/30 rounded-2xl ${category.hoverColor}`}>
-                    {/* Header with icon and title */}
-                    <div className="flex items-center mb-4 sm:mb-6">
-                      <motion.div 
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${category.iconGradient} rounded-xl flex items-center justify-center mr-3 sm:mr-4 shadow-glow flex-shrink-0`}
-                      >
-                        <IconComponent className="text-white w-5 h-5 sm:w-6 sm:h-6" />
-                      </motion.div>
-                      <div>
-                        <h3 className="text-base sm:text-lg font-poppins font-semibold group-hover:text-primary transition-smooth leading-snug">
-                          {category.title}
-                        </h3>
-                        <div className={`w-8 h-0.5 bg-gradient-to-r ${category.iconGradient} rounded-full mt-1`} />
+                  <div>
+                    {/* Header */}
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-300">
+                        <IconComponent className="w-4 h-4" />
                       </div>
-                    </div>
-                    
-                    {/* Skills grid */}
-                    <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
-                      {category.skills.map((skill, skillIndex) => (
-                        <motion.div
-                          key={skill}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.3, delay: (index * 0.1) + (skillIndex * 0.05) }}
-                          whileHover={{ scale: 1.03 }}
-                          className="relative overflow-hidden"
-                        >
-                          <div className="bg-secondary/40 hover:bg-primary/10 p-2 sm:p-2.5 rounded-lg border border-border/30 hover:border-primary/30 transition-smooth group/skill cursor-default h-full flex items-center">
-                            <div className="flex items-center justify-between w-full gap-1">
-                              <span className="text-xs sm:text-sm font-medium text-foreground/90 group-hover/skill:text-primary transition-smooth truncate">
-                                {skill}
-                              </span>
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                whileHover={{ scale: 1 }}
-                                className={`w-1.5 h-1.5 bg-gradient-to-r ${category.iconGradient} rounded-full flex-shrink-0`}
-                              />
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
+                      <h3 className="text-sm font-semibold text-white tracking-tight">
+                        {category.title}
+                      </h3>
                     </div>
 
-                    {/* Skill count badge */}
-                    <div className="mt-5 sm:mt-6 flex justify-between items-center pt-3 border-t border-border/30">
-                      <div className="flex items-center space-x-2">
-                        <Award className="text-primary" size={15} />
-                        <span className="text-[11px] sm:text-xs text-muted-foreground font-medium">
-                          {category.skills.length} Technologies
+                    {/* Skill Badges */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {category.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-2.5 py-1 rounded-md text-xs font-mono text-zinc-300 bg-white/[0.03] border border-white/[0.06]"
+                        >
+                          {skill}
                         </span>
-                      </div>
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        className={`w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r ${category.iconGradient}/20 rounded-full flex items-center justify-center border border-primary/30`}
-                      >
-                        <Zap className={`bg-gradient-to-r ${category.iconGradient} bg-clip-text text-transparent`} size={13} />
-                      </motion.div>
+                      ))}
                     </div>
                   </div>
-                </motion.div>
+
+                  <div className="mt-5 pt-3 border-t border-white/[0.05] flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                    <span>{category.skills.length} core tools</span>
+                  </div>
+                </div>
               );
             })}
           </div>
-
-          {/* Professional Highlights */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-14 sm:mt-16"
-          >
-            <h3 className="text-xl sm:text-2xl font-poppins font-semibold text-center mb-6 sm:mb-8">
-              Professional <span className="bg-gradient-primary bg-clip-text text-transparent">Highlights</span>
-            </h3>
-            
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-              {[
-                { label: "Problem Solving", icon: GitBranch, description: "Complex algorithm design" },
-                { label: "Team Leadership", icon: Award, description: "Cross-functional collaboration" },
-                { label: "Agile Methodology", icon: Zap, description: "Scrum & Kanban expertise" },
-                { label: "Code Review", icon: Code, description: "Quality assurance focus" }
-              ].map((highlight, index) => {
-                const IconComp = highlight.icon;
-                return (
-                  <motion.div
-                    key={highlight.label}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.5, delay: 0.8 + (index * 0.1) }}
-                    whileHover={{ y: -5 }}
-                    className="glass-card p-3.5 sm:p-6 text-center hover:shadow-glow transition-smooth group rounded-xl sm:rounded-2xl"
-                  >
-                    <motion.div 
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                      className="w-11 h-11 sm:w-14 sm:h-14 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-glow"
-                    >
-                      <IconComp className="text-primary-foreground w-5 h-5 sm:w-6 sm:h-6" />
-                    </motion.div>
-                    <h4 className="text-sm sm:text-base font-poppins font-semibold mb-1 group-hover:text-primary transition-smooth">
-                      {highlight.label}
-                    </h4>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground">{highlight.description}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

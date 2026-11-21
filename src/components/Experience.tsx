@@ -1,136 +1,106 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { MapPin, Calendar, Building, Code, Zap } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Building2, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 
 const Experience = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const { experience } = portfolioData;
 
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-secondary/20" />
-      <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent/5 rounded-full blur-3xl" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-white/[0.06]">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.5 }}
         >
-          {/* Header Section */}
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6"
-            >
-              <Building className="w-8 h-8 text-primary" />
-            </motion.div>
-            
-            <h2 className="text-4xl md:text-5xl font-poppins font-bold mb-4">
-              Professional <span className="bg-gradient-primary bg-clip-text text-transparent">Experience</span>
+          {/* Section Kicker */}
+          <div className="mb-12">
+            <span className="section-tag">
+              02 // Work Experience
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Where I have delivered engineering impact
             </h2>
-            <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-6" />
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              My journey in software development, showcasing key achievements and growth in building scalable applications
+            <p className="mt-2 text-zinc-400 text-base max-w-2xl">
+              Production microservices, high-throughput financial calculations, and incident resolution.
             </p>
           </div>
 
-          {/* Experience Cards */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {experience.map((job, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ duration: 0.6, delay: 0.4 + (index * 0.2) }}
-                className="relative"
+                className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.07] hover:border-white/[0.12] transition-colors"
               >
-                <Card className="glass-card border-primary/20 hover:shadow-elegant transition-all duration-500 group overflow-hidden">
-                  <CardContent className="p-4 sm:p-6 md:p-8">
-                    {/* Header Row */}
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 sm:gap-4 mb-6 pb-5 border-b border-border/40">
-                      <div className="flex-1">
-                        <div className="flex items-center mb-1.5">
-                          <div className="w-2.5 h-2.5 bg-primary rounded-full mr-2.5 flex-shrink-0 animate-pulse" />
-                          <h3 className="text-lg sm:text-xl md:text-2xl font-poppins font-bold text-primary group-hover:text-primary/90 transition-colors leading-snug">
-                            {job.position}
-                          </h3>
-                        </div>
-                        <div className="flex items-center text-sm sm:text-base font-semibold text-foreground/90 ml-5">
-                          <Building className="text-muted-foreground mr-2 flex-shrink-0" size={16} />
-                          {job.company}
-                        </div>
-                      </div>
-                      
-                      {/* Duration and Location Badges */}
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 ml-5 lg:ml-0">
-                        <Badge className="bg-primary/10 text-primary border-primary/25 font-medium px-2.5 sm:px-3 py-1 text-xs w-fit">
-                          <Calendar className="w-3.5 h-3.5 mr-1.5" />
-                          {job.duration}
-                        </Badge>
-                        <div className="flex items-center text-xs sm:text-sm text-muted-foreground font-medium bg-secondary/30 px-2.5 py-1 rounded-full border border-border/40">
-                          <MapPin className="mr-1.5 text-primary" size={14} />
-                          <span>{job.location}</span>
-                        </div>
-                      </div>
+                {/* Header Row */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-white/[0.06]">
+                  <div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                        {job.position}
+                      </h3>
+                      <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        Present
+                      </span>
                     </div>
-
-                    {/* Technologies and Achievements Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-                      {/* Technologies (4-cols on desktop, full width on mobile) */}
-                      <div className="lg:col-span-5 space-y-3">
-                        <h4 className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide flex items-center">
-                          <Code className="w-4 h-4 mr-2 text-primary" />
-                          Technologies Used
-                        </h4>
-                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                          {job.technologies.map((tech) => (
-                            <Badge
-                              key={tech}
-                              variant="secondary"
-                              className="bg-secondary/60 hover:bg-primary/20 hover:text-primary transition-all duration-300 text-[11px] sm:text-xs font-medium border border-border/50 px-2.5 py-1"
-                            >
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Achievements (7-cols on desktop, full width on mobile) */}
-                      <div className="lg:col-span-7 space-y-3">
-                        <h4 className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide flex items-center">
-                          <Zap className="w-4 h-4 mr-2 text-primary" />
-                          Key Achievements
-                        </h4>
-                        <ul className="space-y-2.5 sm:space-y-3">
-                          {job.achievements.map((achievement, idx) => (
-                            <motion.li
-                              key={idx}
-                              initial={{ opacity: 0, x: 20 }}
-                              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                              transition={{ duration: 0.4, delay: (0.4 + index * 0.2) + (idx * 0.1) }}
-                              className="flex items-start text-xs sm:text-sm text-slate-200/90 leading-relaxed group/achievement"
-                            >
-                              <div className="flex-shrink-0 w-1.5 h-1.5 bg-primary rounded-full mt-2 mr-2.5 group-hover/achievement:scale-150 transition-transform duration-300" />
-                              <span>{achievement}</span>
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </div>
+                    <div className="flex items-center gap-2 text-sm text-zinc-300 font-medium">
+                      <Building2 className="w-4 h-4 text-zinc-500" />
+                      <span>{job.company}</span>
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-400">
+                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/[0.03] border border-white/[0.06]">
+                      <Calendar className="w-3.5 h-3.5 text-zinc-500" />
+                      {job.duration}
+                    </span>
+                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/[0.03] border border-white/[0.06]">
+                      <MapPin className="w-3.5 h-3.5 text-zinc-500" />
+                      {job.location}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Body Content */}
+                <div className="grid lg:grid-cols-12 gap-8">
+                  {/* Achievements */}
+                  <div className="lg:col-span-8 space-y-3.5">
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                      Key Deliverables & Responsibilities
+                    </h4>
+                    <ul className="space-y-3">
+                      {job.achievements.map((achievement, aIdx) => (
+                        <li key={aIdx} className="flex items-start text-sm text-zinc-300 leading-relaxed">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Stack */}
+                  <div className="lg:col-span-4 space-y-3">
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">
+                      Stack & Tools Applied
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {job.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2.5 py-1 rounded-md text-xs font-mono text-zinc-300 bg-white/[0.03] border border-white/[0.06]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </motion.div>

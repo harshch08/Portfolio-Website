@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { Heart, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, Code2, ArrowUp } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 import { scrollToSection } from '@/lib/scroll';
 
@@ -8,103 +7,67 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-border/30">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-8 items-center">
+    <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-white/[0.06] bg-[#07080c]">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/[0.05]">
           {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center md:text-left"
-          >
-            <h3 className="text-xl font-poppins font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
+          <div className="text-center md:text-left">
+            <div className="text-sm font-semibold text-white tracking-tight">
               {personal.name}
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              {personal.title}
-            </p>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-center"
-          >
-            <div className="flex flex-wrap justify-center space-x-6 text-sm">
-              {['About', 'Skills', 'Projects', 'Experience', 'Contact'].map((link) => (
-                <button
-                  key={link}
-                  onClick={() => scrollToSection(`#${link.toLowerCase()}`)}
-                  className="text-muted-foreground hover:text-primary transition-smooth"
-                >
-                  {link}
-                </button>
-              ))}
             </div>
-          </motion.div>
+            <div className="text-xs text-zinc-500 font-mono mt-0.5">
+              Full Stack Developer • TCS
+            </div>
+          </div>
+
+          {/* Nav links */}
+          <div className="flex flex-wrap justify-center gap-6 text-xs font-medium text-zinc-400">
+            {['About', 'Experience', 'Projects', 'Skills', 'Education', 'Contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(`#${item.toLowerCase()}`)}
+                className="hover:text-white transition-colors"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
 
           {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex justify-center md:justify-end space-x-4"
-          >
-            <motion.a
-              href={personal.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2 text-muted-foreground hover:text-primary transition-smooth"
-            >
-              <Github size={20} />
-            </motion.a>
-            <motion.a
-              href={personal.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2 text-muted-foreground hover:text-primary transition-smooth"
-            >
-              <Linkedin size={20} />
-            </motion.a>
-            <motion.a
-              href={`mailto:${personal.email}`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2 text-muted-foreground hover:text-primary transition-smooth"
-            >
-              <Mail size={20} />
-            </motion.a>
-            <motion.a
-              href={personal.social.leetcode}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2 text-muted-foreground hover:text-primary transition-smooth"
-            >
-              <ExternalLink size={20} />
-            </motion.a>
-          </motion.div>
+          <div className="flex items-center space-x-2">
+            {[
+              { href: personal.social.github, icon: Github, label: 'GitHub' },
+              { href: personal.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
+              { href: personal.social.leetcode, icon: Code2, label: 'LeetCode' },
+              { href: `mailto:${personal.email}`, icon: Mail, label: 'Email' },
+            ].map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto') ? undefined : '_blank'}
+                rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                aria-label={label}
+                className="p-2 text-zinc-400 hover:text-white hover:bg-white/[0.05] rounded-md transition-colors"
+              >
+                <Icon size={16} />
+              </a>
+            ))}
+          </div>
         </div>
 
-        {/* Copyright */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 pt-8 border-t border-border/30 text-center"
-        >
-          <p className="text-sm text-muted-foreground flex items-center justify-center">
-            © {currentYear} {personal.name}. All rights reserved.
-          </p>
-        </motion.div>
+        {/* Bottom bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono gap-3">
+          <div>
+            © {currentYear} Harsh Chauhan. Built with React, TypeScript & Tailwind CSS.
+          </div>
+          <button
+            onClick={() => scrollToSection('#hero')}
+            className="flex items-center gap-1.5 hover:text-zinc-300 transition-colors"
+          >
+            Back to top
+            <ArrowUp className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
     </footer>
   );

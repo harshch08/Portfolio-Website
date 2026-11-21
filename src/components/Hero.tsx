@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Code2, Download } from 'lucide-react';
+import { Github, Linkedin, Mail, Code2, Download, ArrowDown, MapPin, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { portfolioData } from '@/data/portfolio';
 import { scrollToSection } from '@/lib/scroll';
@@ -18,162 +18,112 @@ const Hero = () => {
     document.body.removeChild(link);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.15
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    }
-  };
-
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* High-Performance Modern Animated Background */}
+    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 pb-16">
       <HeroBackground />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center flex flex-col items-center"
         >
-          <motion.h1
-            variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins font-bold mb-4 px-4"
-          >
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              {personal.name}
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md mb-8">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-          </motion.h1>
+            <span className="text-xs font-mono text-zinc-300 tracking-wide">
+              Full Stack Developer • TCS
+            </span>
+            <span className="text-zinc-600 font-mono">|</span>
+            <span className="text-xs text-zinc-400 flex items-center gap-1">
+              <MapPin className="w-3 h-3 text-zinc-500" />
+              Kolkata, India
+            </span>
+          </div>
 
-          <motion.h2
-            variants={itemVariants}
-            className="text-xl sm:text-2xl md:text-3xl font-poppins font-medium text-muted-foreground mb-6 px-4"
-          >
-            {personal.title}
-          </motion.h2>
+          {/* Name & Title */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-6">
+            Harsh Chauhan
+          </h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed px-4"
-          >
-            {personal.tagline}
-          </motion.p>
+          <p className="text-lg sm:text-2xl font-medium text-zinc-300 max-w-3xl mx-auto mb-6 leading-relaxed">
+            Building scalable microservices, full-stack architectures & ML-enabled systems.
+          </p>
 
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 px-4"
-          >
+          <p className="text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Software Developer with expertise in Java, Spring Boot, Angular, and cloud services. 
+            Experienced in monolith-to-microservices migration, high-throughput REST APIs, and applied AI search pipelines.
+          </p>
+
+          {/* Core Tech Stack Row */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10 max-w-xl">
+            {['Java', 'Spring Boot', 'Microservices', 'Angular', 'React', 'Node.js', 'MySQL', 'AWS', 'CLIP / AI'].map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-1 rounded-md text-xs font-mono text-zinc-300 bg-white/[0.03] border border-white/[0.08]"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Action CTAs */}
+          <div className="flex flex-wrap items-center justify-center gap-3.5 mb-12 w-full sm:w-auto">
             <Button
               size="lg"
-              className="bg-gradient-primary hover:shadow-glow transition-smooth font-medium"
+              className="bg-white hover:bg-zinc-200 text-zinc-950 font-medium px-6 shadow-md transition-all duration-200 min-h-[44px]"
               onClick={() => scrollToSection('#projects')}
             >
-              View My Work
+              View Selected Work
+              <ArrowDown className="w-4 h-4 ml-2" />
             </Button>
+
             <Button
               variant="outline"
               size="lg"
-              className="border-primary/50 hover:bg-primary/10 transition-smooth font-medium"
+              className="border-white/10 bg-white/[0.03] hover:bg-white/[0.08] text-zinc-200 font-medium px-6 transition-all duration-200 min-h-[44px]"
               onClick={() => scrollToSection('#contact')}
             >
               Get In Touch
             </Button>
-          </motion.div>
 
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center space-x-4 sm:space-x-6 px-4"
-          >
-            <motion.a
-              href={personal.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 glass-card hover:shadow-glow transition-smooth hover:text-primary"
-            >
-              <Github size={24} />
-            </motion.a>
-            <motion.a
-              href={personal.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 glass-card hover:shadow-glow transition-smooth hover:text-primary"
-            >
-              <Linkedin size={24} />
-            </motion.a>
-            <motion.a
-              href={`mailto:${personal.email}`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 glass-card hover:shadow-glow transition-smooth hover:text-primary"
-            >
-              <Mail size={24} />
-            </motion.a>
-            <motion.a
-              href={personal.social.leetcode}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 glass-card hover:shadow-glow transition-smooth hover:text-primary"
-            >
-              <Code2 size={24} />
-            </motion.a>
-          </motion.div>
-
-          {/* Mobile Resume Download Button */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center mt-8 lg:hidden"
-          >
             <Button
-              onClick={downloadResume}
-              size="lg"
               variant="outline"
-              className="border-primary/50 hover:bg-primary/10 transition-smooth font-medium"
+              size="lg"
+              className="border-white/10 bg-white/[0.03] hover:bg-white/[0.08] text-zinc-200 font-medium px-5 transition-all duration-200 min-h-[44px]"
+              onClick={downloadResume}
             >
-              <Download className="w-5 h-5 mr-2" />
+              <Download className="w-4 h-4 mr-2 text-zinc-400" />
               Resume
             </Button>
-          </motion.div>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex items-center justify-center space-x-2">
+            {[
+              { href: personal.social.github, icon: Github, label: 'GitHub' },
+              { href: personal.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
+              { href: personal.social.leetcode, icon: Code2, label: 'LeetCode' },
+              { href: `mailto:${personal.email}`, icon: Mail, label: 'Email' },
+            ].map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto') ? undefined : '_blank'}
+                rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                aria-label={label}
+                className="p-2.5 rounded-lg text-zinc-400 hover:text-white bg-white/[0.02] hover:bg-white/[0.08] border border-white/[0.06] hover:border-white/[0.15] transition-all duration-200"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center"
-        >
-          <div className="w-1 h-2 bg-primary rounded-full mt-2" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 };

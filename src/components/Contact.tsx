@@ -1,138 +1,188 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Code2 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Mail, Phone, MapPin, Github, Linkedin, Code2, Copy, Check, ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 
 const Contact = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const { personal } = portfolioData;
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText(personal.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-secondary/30">
-      <div className="max-w-7xl mx-auto">
+    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 border-t border-white/[0.06]">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-poppins font-bold mb-4">
-              Get In <span className="bg-gradient-primary bg-clip-text text-transparent">Touch</span>
+          {/* Section Header */}
+          <div className="mb-14">
+            <span className="section-tag">
+              06 // Get in Touch
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Let's Connect
             </h2>
-            <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
-            <p className="mt-6 text-muted-foreground max-w-2xl mx-auto">
-              Let's discuss opportunities and collaborate on exciting projects
+            <p className="mt-2 text-zinc-400 text-base max-w-2xl">
+              I am open to software engineering opportunities, technical collaborations, and distributed systems discussions.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
-            {/* Contact Information */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Card className="glass-card border-border/50 hover:shadow-elegant transition-smooth h-full rounded-2xl overflow-hidden">
-                <CardHeader className="text-center p-4 sm:p-6 pb-4 sm:pb-6">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-glow">
-                    <Mail className="text-primary-foreground w-6 h-6 sm:w-7 sm:h-7" />
-                  </div>
-                  <CardTitle className="text-xl sm:text-2xl font-poppins font-semibold">Contact Information</CardTitle>
-                </CardHeader>
-                <CardContent className="p-4 sm:p-6 pt-0 space-y-3 sm:space-y-4">
-                  <a 
-                    href={`mailto:${personal.email}`}
-                    className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 glass-card rounded-xl hover:shadow-glow transition-smooth border border-border/30 group block"
-                  >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                      <Mail className="text-primary-foreground w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-sm sm:text-base text-foreground">Email</p>
-                      <p className="text-xs sm:text-sm text-muted-foreground truncate group-hover:text-primary transition-colors">{personal.email}</p>
-                    </div>
-                  </a>
-                  <a 
-                    href={`tel:${personal.phone}`}
-                    className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 glass-card rounded-xl hover:shadow-glow transition-smooth border border-border/30 group block"
-                  >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
-                      <Phone className="text-primary-foreground w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-sm sm:text-base text-foreground">Phone</p>
-                      <p className="text-xs sm:text-sm text-muted-foreground group-hover:text-primary transition-colors">{personal.phone}</p>
-                    </div>
-                  </a>
-                  <div className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 glass-card rounded-xl border border-border/30">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
-                      <MapPin className="text-primary-foreground w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-sm sm:text-base text-foreground">Location</p>
-                      <p className="text-xs sm:text-sm text-muted-foreground">{personal.location}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Primary Action Card */}
+            <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  Direct Contact
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  Feel free to reach out directly via email or phone. I typically respond within 24 hours.
+                </p>
+              </div>
 
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Card className="glass-card border-border/50 hover:shadow-elegant transition-smooth h-full rounded-2xl overflow-hidden">
-                <CardHeader className="text-center p-4 sm:p-6 pb-4 sm:pb-6">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-glow">
-                    <Github className="text-primary-foreground w-6 h-6 sm:w-7 sm:h-7" />
+              {/* Email Box with copy button */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.08]">
+                <div className="flex items-center space-x-3 truncate">
+                  <div className="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
+                    <Mail className="w-4 h-4" />
                   </div>
-                  <CardTitle className="text-xl sm:text-2xl font-poppins font-semibold">Connect With Me</CardTitle>
-                </CardHeader>
-                <CardContent className="p-4 sm:p-6 pt-0">
-                  <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
-                    <motion.a
-                      href={personal.social.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05, y: -4 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-3.5 sm:p-6 glass-card rounded-xl sm:rounded-2xl hover:shadow-glow transition-smooth hover:text-primary text-center group border border-border/30 flex flex-col items-center justify-center min-h-[90px] sm:min-h-[120px]"
+                  <div className="truncate">
+                    <div className="text-[11px] font-mono text-zinc-500 uppercase">Email Address</div>
+                    <a
+                      href={`mailto:${personal.email}`}
+                      className="text-sm font-medium text-white hover:text-blue-400 transition-colors truncate block"
                     >
-                      <Github className="w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-3 group-hover:scale-110 transition-transform text-primary" />
-                      <p className="font-medium text-xs sm:text-sm">GitHub</p>
-                    </motion.a>
-                    <motion.a
-                      href={personal.social.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05, y: -4 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-3.5 sm:p-6 glass-card rounded-xl sm:rounded-2xl hover:shadow-glow transition-smooth hover:text-primary text-center group border border-border/30 flex flex-col items-center justify-center min-h-[90px] sm:min-h-[120px]"
-                    >
-                      <Linkedin className="w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-3 group-hover:scale-110 transition-transform text-primary" />
-                      <p className="font-medium text-xs sm:text-sm">LinkedIn</p>
-                    </motion.a>
-                    <motion.a
-                      href={personal.social.leetcode}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05, y: -4 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-3.5 sm:p-6 glass-card rounded-xl sm:rounded-2xl hover:shadow-glow transition-smooth hover:text-primary text-center group border border-border/30 flex flex-col items-center justify-center min-h-[90px] sm:min-h-[120px]"
-                    >
-                      <Code2 className="w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-3 group-hover:scale-110 transition-transform text-primary" />
-                      <p className="font-medium text-xs sm:text-sm">LeetCode</p>
-                    </motion.a>
+                      {personal.email}
+                    </a>
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={copyEmail}
+                    className="px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 hover:text-white border border-white/[0.08] transition-colors flex items-center justify-center gap-1.5"
+                    aria-label="Copy email"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-zinc-400" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+
+                  <a
+                    href={`mailto:${personal.email}`}
+                    className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-zinc-950 hover:bg-zinc-200 transition-colors flex items-center justify-center gap-1"
+                  >
+                    Send
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Phone and Location Cards */}
+              <div className="grid sm:grid-cols-2 gap-3.5">
+                <a
+                  href={`tel:${personal.phone}`}
+                  className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-colors flex items-center space-x-3 group"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors flex-shrink-0">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div className="truncate">
+                    <div className="text-[11px] font-mono text-zinc-500 uppercase">Phone</div>
+                    <div className="text-xs sm:text-sm font-medium text-zinc-200 group-hover:text-white transition-colors truncate">
+                      {personal.phone}
+                    </div>
+                  </div>
+                </a>
+
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center space-x-3">
+                  <div className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-400 flex-shrink-0">
+                    <MapPin className="w-4 h-4" />
+                  </div>
+                  <div className="truncate">
+                    <div className="text-[11px] font-mono text-zinc-500 uppercase">Location</div>
+                    <div className="text-xs sm:text-sm font-medium text-zinc-200 truncate">
+                      {personal.location}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Channels Column */}
+            <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-4">
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Online Profiles
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed mb-4">
+                Explore my repositories, professional updates, and algorithmic problem solving.
+              </p>
+
+              <div className="space-y-2.5">
+                {[
+                  {
+                    name: 'GitHub',
+                    desc: 'Repositories, open source & side projects',
+                    href: personal.social.github,
+                    icon: Github,
+                  },
+                  {
+                    name: 'LinkedIn',
+                    desc: 'Professional history & networking',
+                    href: personal.social.linkedin,
+                    icon: Linkedin,
+                  },
+                  {
+                    name: 'LeetCode',
+                    desc: 'Data structures & algorithms practice',
+                    href: personal.social.leetcode,
+                    icon: Code2,
+                  },
+                ].map(({ name, desc, href, icon: Icon }) => (
+                  <a
+                    key={name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.06] hover:border-white/[0.12] transition-colors flex items-center justify-between group"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-white group-hover:text-blue-400 transition-colors">
+                          {name}
+                        </div>
+                        <div className="text-xs text-zinc-500">
+                          {desc}
+                        </div>
+                      </div>
+                    </div>
+                    <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-white transition-colors" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
